@@ -1,0 +1,29 @@
+Folder PATH listing
+Volume serial number is 9A63-9515
+C:.
+|   manage.py
+|   tree.doc
+|   tree1.doc
+|   
++---data_pres
+|   |   admin.py
+|   |   apps.py
+|   |   models.py
+|   |   tests.py
+|   |   views.py
+|   |   __init__.py
+|   |   
+|   \---migrations
+|           __init__.py
+|           
+\---project
+    |   asgi.py
+    |   settings.py
+    |   urls.py
+    |   wsgi.py
+    |   __init__.py
+    |   
+    \---__pycache__
+            settings.cpython-39.pyc
+            __init__.cpython-39.pyc
+            

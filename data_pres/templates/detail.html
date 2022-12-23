@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+<div class="container d-flex mt-5" style="width: 95%;">
+    <div class="col">
+        <table class="table table-striped mt-5">
+
+            <thead>
+                <tr>
+                  {% comment %} <th>#</th> {% endcomment %}
+                    <th class="text-center" scope="col">Teryt</th>
+                    <th class="text-center" scope="col">Okres</th>
+                    <th class="text-center" scope="col">Dana 1</th>
+                    <th class="text-center" scope="col">Dana 2</th>
+                    <th class="text-center" scope="col">Dana 3</th>
+                    <th class="text-center" scope="col">Dana 4</th>
+                    <th class="text-center" scope="col">Dana 5</th>
+                    <th class="text-center" scope="col">Dana 6</th>
+                    <th class="text-center" scope="col">Dana 7</th>
+                    <th class="text-center" scope="col">Dana 8</th>
+                    <th class="text-center" scope="col">Dana 9</th>
+                </tr>
+              </thead>
+
+         
+            <tr>
+
+                <td class="text-center">{{ danes.teryt }}</td>
+                <td class="text-center">{{ danes.okres }}</td>
+                <td class="text-center">{{ danes.dana1|default_if_none:"" }}</td>
+                <td class="text-center">{{ danes.dana2|default_if_none:"" }}</td>
+                <td class="text-center">{{ danes.dana3|default_if_none:"" }}</td>
+                <td class="text-center">{{ danes.dana4|default_if_none:"" }}</td>
+                <td class="text-center">{{ danes.dana5|default_if_none:"" }}</td>
+                <td class="text-center">{{ danes.dana6|default_if_none:"" }}</td>
+                <td class="text-center">{{ danes.dana7 }}</td>
+                <td class="text-center">{{ danes.dana8 }}</td>
+                <td class="text-center">{{ danes.dana9 }}</td>
+            </tr>
+        </table> 
+
+    </div>      
+</div>    
+
+<div class="d-flex justify-content-center">
+    <a href="{% url 'data_list' %}" class="d-block btn btn-primary btn-lg my-5">Powrót</a>
+</div>
+
+{% endblock content %}

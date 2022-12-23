@@ -1,0 +1,115 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+
+    <form action="">
+        <div class="mb-3">
+          <label class="form-label">Wyszukiwanie Teryt</label>
+          <input type="text" name="searchData" class="form-control">
+        </div>
+        <button type="submit" class="btn btn-primary">Wyszukaj</button>
+      </form>
+      <br>
+      <br>
+      
+      {% if searchTerm %}
+        <h4>Wyniki wyszukiwania Teryt = {{ searchTerm }}</h4>
+      {% endif %}    
+      <h3>Lista danych</h3>
+
+
+<div class="container d-flex mt-5" style="width: 100%;">
+  <div class="col">
+    <h1 class="text-center">Dane wszystkie </h1>
+      <table class="table table-striped mt-5">
+        <thead>
+          <tr>
+            {% comment %} <th>#</th> {% endcomment %}
+              <th class="text-center" scope="col">Teryt</th>
+              <th class="text-center" scope="col">Okres</th>
+              <th class="text-center" scope="col">Dana 1</th>
+              <th class="text-center" scope="col">Dana 2</th>
+              <th class="text-center" scope="col">Dana 3</th>
+              <th class="text-center" scope="col">Dana 4</th>
+              <th class="text-center" scope="col">Dana 5</th>
+              <th class="text-center" scope="col">Dana 6</th>
+              <th class="text-center" scope="col">Dana 7</th>
+              <th class="text-center" scope="col">Dana 8</th>
+              <th class="text-center" scope="col">Dana 9</th>
+              {% if user.is_authenticated %}
+                <th class="text-center" scope="col">Aktualizacja</th>
+                <th class="text-center" scope="col">Usunięcie</th>
+              {% endif %}
+              </tr>
+        </thead>
+       
+        <tbody>
+          {% for dane in danes %}
+            <tr>
+                  <td class="text-center"><a href="{% url 'detail' dane.id %}"> {{ dane.teryt }}</td></a>
+                  <td class="text-center">{{ dane.okres }}</td>
+                  <td class="text-center">{{ dane.dana1|default_if_none:"" }}</td>
+                  <td class="text-center">{{ dane.dana2|default_if_none:"" }}</td>
+                  <td class="text-center">{{ dane.dana3|default_if_none:"" }}</td>
+                  <td class="text-center">{{ dane.dana4|default_if_none:"" }}</td>
+                  <td class="text-center">{{ dane.dana5|default_if_none:"" }}</td>
+                  <td class="text-center">{{ dane.dana6|default_if_none:"" }}</td>
+                  <td class="text-center">{{ dane.dana7 }}</td>
+                  <td class="text-center">{{ dane.dana8 }}</td>
+                  <td class="text-center">{{ dane.dana9 }}</td>
+                  
+                  {% comment %}<td class="text-center">{{przedmiot.uwagi}}</td>
+                  <td class="text-center">{{przedmiot.pracownik}}</td>
+                  <td><a href="{% url 'inw:przedmiot_update' przedmiot.id %} ">Aktualizuj</a></td>
+                  <td><a href="{% url 'inw:przedmiot_delete' przedmiot.id %}">Usuń</a></td>
+                  {% endcomment %}
+
+                  {% if user.is_authenticated %}
+                    <td class="text-center">
+                      <a href="{% url 'updatedanes' dane.id %}"> Aktualizuj</a>
+                    </td>
+                    <td class="text-center"><a href="{% url 'deletedanes' dane.id %}">
+                      Usuń</a></td>
+                  {% endif %}
+            </tr>
+            {% endfor %}
+            <!--Pagination
+            from https://ordinarycoders.com/blog/article/django-pagination
+            -->
+            <div class="container p-4">
+              <div class="pagination justify-content-center">
+                  <span class="step-links">
+                    {% if danes.has_previous %}
+                        <a href="?page=1">&laquo; pierwszy</a>
+                        <a href="?page={{ danes.previous_page_number }}">poprzedni</a>
+                    {% endif %}
+
+                      <span class="current">
+                          Strona <b>{{ danes.number }}</b> z <b>{{ danes.paginator.num_pages }}</b>
+                      </span>
+
+                    {% if danes.has_next %}
+                        <a href="?page={{ danes.next_page_number }}">następny</a>
+                        <a href="?page={{ danes.paginator.num_pages }}">ostatni &raquo;</a>
+                    {% endif %}
+                  </span>
+                  </div>
+              </div>
+            <!--end of Pagination-->
+          
+          
+          
+          </tbody>    
+      </table> 
+  </div>      
+</div>      
+{% if user.is_authenticated %}
+  <a href="{% url 'createdanes' %}" class="btn btn-primary">
+      Dodaj rekord
+  </a>
+
+{% endif %}
+
+{% endblock content %}
